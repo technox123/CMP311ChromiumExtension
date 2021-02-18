@@ -55,5 +55,10 @@ $(document).ready(function() {
         length.classList.add("invalid");
       }
   });
+
+  if (window.matchMedia('(prefers-color-scheme)').media !== 'not all') {
+    output = "🎉 Dark mode is supported";
+  }
+
 });
  
