@@ -8,7 +8,7 @@ class Account{
     // object properties
     public $email;
     public $password;
-    //public $verson;
+    public $version;
 
     // constructor with $db as database connection
     public function __construct($db){
@@ -23,6 +23,26 @@ class Account{
                     email, password
                 FROM
                     " . $this->table_name . "";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }
+
+    // used when filling up the update product form
+    function readVersion(){
+
+        // select all query
+        $query = "SELECT
+                    version
+                FROM
+                    " . $this->table_name . "
+                LIMIT 1";
+
       
         // prepare query statement
         $stmt = $this->conn->prepare($query);
