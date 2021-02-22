@@ -56,9 +56,9 @@ $(document).ready(function() {
       }
   });
 
-  if (window.matchMedia('(prefers-color-scheme)').media !== 'not all') {
-    output = "🎉 Dark mode is supported";
-  }
+  //if (window.matchMedia('(prefers-color-scheme)').media !== 'not all') {
+  //  output = "🎉 Dark mode is supported";
+  //}
 
 });
  
