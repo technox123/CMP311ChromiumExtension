@@ -2,8 +2,6 @@ var el_down = document.getElementById("generate");
 
 function generateP() {
    
-   var generatedPassword = "";
-   
    var lower1 = "";
    var lower2 = "";
    var lower3 = "";
@@ -16,11 +14,12 @@ function generateP() {
    
    var No1 = "";
    var No2 = "";
+   var No3 = "";
    var NoT = "";
    
    var Symb1 = "";
    
-   function shuffle(array) {
+   /*function shuffle(array) {
 	var currentIndex = array.length, temporaryValue, randomIndex;
 
 	// While there remain elements to shuffle...
@@ -37,7 +36,7 @@ function generateP() {
   }
 
 	return array;
-	}
+	}*/
    
    
    function secureMathRandom() {
@@ -48,15 +47,16 @@ function generateP() {
 	   lower1 = String.fromCharCode(Math.floor(Math.random() * 26) + 97);
 	   lower2 = String.fromCharCode(Math.floor(Math.random() * 26) + 97);
 	   lower3 = String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-	   lowerT = lower1 + lower2;
+	   //lowerT = lower1 + lower2;
 	   
 	   Higher1 = String.fromCharCode(Math.floor(Math.random() * 26) + 65);
 	   Higher2 = String.fromCharCode(Math.floor(Math.random() * 26) + 65);
 	   Higher3 = String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-	   HigherT = Higher1 + Higher2 + Higher3;
+	   //HigherT = Higher1 + Higher2 + Higher3;
 	   
 	   No1 = String.fromCharCode(Math.floor(secureMathRandom() * 10) + 48);
 	   No2 = String.fromCharCode(Math.floor(secureMathRandom() * 10) + 48);
+	   No3 = String.fromCharCode(Math.floor(secureMathRandom() * 10) + 48);
 	   NoT = No1 + No2;
 	   
 	   const symbols = '~!@#$%^&*()_+{}":?><;.,';
@@ -65,14 +65,18 @@ function generateP() {
 	   
 	
 	
-	var arr = [lower1, Higher1, Higher3, No1, lower3, Higher2, lower2, NoT, Symb1];
+	var arr = [lower1, Higher1, Higher3, No3, lower3, Higher2, lower2, NoT, Symb1];
+	
+	arr = arr.sort(() => Math.random() - 0.5);
 	
    
-   shuffle(arr);
+   //shuffle(arr);
    
    var arrayGPass = arr.join('');
    
    return arrayGPass;
+   
+   
    
 }
 
