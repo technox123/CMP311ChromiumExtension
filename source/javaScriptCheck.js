@@ -4,6 +4,9 @@ var number = document.getElementById("number");
 var length = document.getElementById("length");
 var elemId = "psw";
 var myInput = document.getElementById("psw");
+document.getElementById("download_database").addEventListener("click", download_database);
+document.getElementById("clear_database").addEventListener("click", clear_database);
+document.getElementById("get_value_test").addEventListener("click", get_value);
 
 /* When the user clicks on the password field, show the message box
 myInput.onfocus = function() {
@@ -60,5 +63,61 @@ $(document).ready(function() {
   //  output = "🎉 Dark mode is supported";
   //}
 
+  /*var local = (function(){
+
+    var getData = function(key){
+        if(localStorage.getItem(key) != null){
+          return JSON.parse(localStorage.getItem(key));
+        }else{
+            return false;
+        }
+    }
+
+  })();*/
+
 });
+
+var local = (function(){
+
+  var setData = function(key,obj){
+      var values = JSON.stringify(obj);
+      localStorage.setItem(key,values);
+  }
+
+  var getData = function(key){
+      if(localStorage.getItem(key) != null){
+        return JSON.parse(localStorage.getItem(key));
+      }else{
+        return false;
+      }
+  }
+
+  var clearDatabase = function() {
+    localStorage.clear();
+  }
+  return {set:setData,get:getData,clear:clearDatabase}
+})();
+
+function download_database() {
+  $.getJSON('https://mayar.abertay.ac.uk/~cmp311g20eh12/API/account/read_passwords.php', function(result){
+
+
+    $.each( result, function( key, val ) {
+      console.log("Currently saving this password: " + JSON.stringify(val.password));
+      local.set(val.password, val.password);
+
+      //items.push( "<li id='" + key + "'>" + val + "</li>" );
+    });
+  });
+}
+
+function clear_database() {
+  local.clear();
+  console.log("Cleared local storage!");
+}
+
+function get_value() {
+  var a = local.get('123456');
+  console.log("The current value that is found is: " + JSON.stringify(a));
+}
  
