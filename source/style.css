@@ -16,7 +16,7 @@ body {
   height: 400px;
   position: relative;
   vertical-align:middle;
-  background-color: #1ECBE1 !important;
+  background-color: #57d3e4 !important;
 }
 
 h1 {
@@ -24,11 +24,15 @@ h1 {
   text-decoration: underline;
 }
 
+h3 {
+  text-align: center;
+  
+}
+
 #sub {
-  font-weight:normal;
+  font-weight: normal;
   font-size: 4mm;
   text-align: center;
-
 }
 
 /* Style the submit button 
@@ -55,7 +59,6 @@ input[type=submit] {
   width: relative;
   position: relative;
   font-weight: bold;
-text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 #message p {
@@ -75,7 +78,8 @@ text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 
 /* Add a red text color and an "x" icon when the requirements are wrong */
 .invalid {
-  color: #d60303;
+  color: #ffffff;
+  text-shadow: -.5px -.5px 0 #000, .5px -.5px 0 #000, -.5px .5px 0 #000, .5px .5px 0 #000;
 }
 
 .invalid:before {
