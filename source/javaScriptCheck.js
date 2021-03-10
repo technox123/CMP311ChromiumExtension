@@ -4,6 +4,8 @@ var number = document.getElementById("number");
 var length = document.getElementById("length");
 var elemId = "psw";
 var myInput = document.getElementById("psw");
+var passwordTypingTimer;
+var passwordDoneTypingInterval = 1000;
 document.getElementById("download_database").addEventListener("click", download_database);
 document.getElementById("clear_database").addEventListener("click", clear_database);
 document.getElementById("get_value_test").addEventListener("click", get_value);
@@ -57,6 +59,10 @@ $(document).ready(function() {
         length.classList.remove("valid");
         length.classList.add("invalid");
       }
+
+
+      clearTimeout(passwordTypingTimer);
+      passwordTypingTimer = setTimeout(checkPassword(myInput.value, passwordDoneTypingInterval));
   });
 
   //if (window.matchMedia('(prefers-color-scheme)').media !== 'not all') {
@@ -95,6 +101,7 @@ var local = (function(){
   var clearDatabase = function() {
     localStorage.clear();
   }
+
   return {set:setData,get:getData,clear:clearDatabase}
 })();
 
@@ -119,5 +126,13 @@ function clear_database() {
 function get_value() {
   var a = local.get('123456');
   console.log("The current value that is found is: " + JSON.stringify(a));
+}
+
+function checkPassword(password) {
+  if(local.get(password)) {
+    console.log('Password found in database, password is BREACHED');
+  } else {
+    console.log('Password is not found in the local database, password seems save to use');
+  }
 }
  
