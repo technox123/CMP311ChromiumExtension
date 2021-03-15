@@ -87,3 +87,8 @@ input[type=submit] {
   left: -6.75px;
   content: "❌";
 }
+
+/* navbar */
+.navbar-brand img{
+  height: 32px;
+}
