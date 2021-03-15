@@ -26,7 +26,6 @@ h1 {
 
 h3 {
   text-align: center;
-  
 }
 
 #sub {
@@ -54,8 +53,8 @@ input[type=submit] {
 #message {
   color: #000;
   position: relative;
-  padding: 10px 20px 20px 20px;
-  margin-top: 10px;
+  padding: 10px 20px 10px 20px;
+  /* margin-top: 10px; */
   width: relative;
   position: relative;
   font-weight: bold;
@@ -63,6 +62,7 @@ input[type=submit] {
 
 #message p {
   font-size: 15px;
+  padding-left: 10px;
 }
 
 /* Add a green text color and a checkmark when the requirements are right */
@@ -91,4 +91,10 @@ input[type=submit] {
 /* navbar */
 .navbar-brand img{
   height: 32px;
+}
+
+.nav-item.active .nav-link,
+.nav-item:hover .nav-link {
+    text-decoration: underline;
+    text-decoration-color: #00ffff;
 }
