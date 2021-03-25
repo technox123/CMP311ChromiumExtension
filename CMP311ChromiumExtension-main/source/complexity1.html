@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Click the button to display the array values after the split.</p>
+
+<label for="psw">Password</label>
+	<input type="text" id="psw" name="psw" required>
+<div> <p id  = "complex_p">   </p> </div>
+<button id = "buttonC" >Try it</button> 
+
+<p id="demo"></p>
+
+<p id="demo2"> </p>
+
+<script>
+var el_down = getElementById("complex_p")
+document.getElementById("buttonC").addEventListener("click", complexity_run);
+
+function myFunction() {
+	var myInput = document.getElementById("psw").value;     //get user input from html form
+  var res = myInput.split("");							    //put user input into array
+  document.getElementById("demo").innerHTML = res;			//displaying array 
+  
+  var complexity = 0;
+  
+  var numbComplexP = false;
+  var numbComplexN = false;
+  
+  //checking the array for recurrences (complexity)
+  for (var i = 0; i < res.length; i++){
+	if (res[i] == null && res[i + 1] == null){
+  complexity = complexity;
+  }
+  else if (res[i] == res[i + 1]){
+	complexity = complexity + 1;
+	}
+  }
+  
+  //checking the array for  + predictable sequences (1234)
+  for (var i = 0; i < res.length; i++){
+	for (var j = 0; j < res.length; j++){
+	if (res[i] == null && res[i + 1] == null){
+  complexity = complexity;
+  }
+  else if (res[i] == (j + 1) && res[i + 1] == (j + 2)){
+		numbComplexP = true;
+	}
+  }
+  }
+  
+  if (numbComplexP == true){
+  complexity = complexity + 1;
+  }
+  
+  //checking the array for  - predictable sequences (9876)
+  for (var i = 0; i < res.length; i++){
+	for (var j = 9; j > res.length; j--){
+	if (res[i] == null && res[i + 1] == null){
+  complexity = complexity;
+  }
+  else if (res[i] == (j - 1) && res[i + 1] == (j - 2)){
+		numbComplexN = true;
+	}
+  }
+  }
+  
+  if (numbComplexN == true){
+  complexity = complexity + 1;
+  }
+  
+  document.getElementById("demo2").innerHTML = complexity;              //displaying complexity variable to the html form
+  
+}
+function complexity_run{
+el_down.innerHTML = myFunction();
+}
+</script>
+
+</body>
+</html>
