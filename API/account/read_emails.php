@@ -18,7 +18,7 @@ $db = $database->getConnection();
 $Account = new Account($db);
   
 // query products
-$stmt = $Account->readPassword();
+$stmt = $Account->readEmail();
 $num = $stmt->rowCount();
 
 // check if more than 0 record found
@@ -38,8 +38,8 @@ if($num>0){
         extract($row);
   
         $account_item=array(
-            //"email" => $email,
-            "password" => $password,
+            "email" => $email,
+            //"password" => $password,
             //"version" => $version
         );
   
@@ -58,6 +58,6 @@ if($num>0){
   
     // tell the user no products found
     echo json_encode(
-        array("message" => "No passwords found, please contact administrator.")
+        array("message" => "No emails found, please contact administrator.")
     );
 }

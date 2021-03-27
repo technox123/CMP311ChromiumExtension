@@ -70,5 +70,23 @@ class Account{
       
         return $stmt;
     }
+
+    // used when filling up the update product form
+    function readEmail(){
+
+        // select all query
+        $query = "SELECT
+                    email
+                FROM
+                    " . $this->table_name . "";
+      
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+      
+        // execute query
+        $stmt->execute();
+      
+        return $stmt;
+    }
 }
 ?>
