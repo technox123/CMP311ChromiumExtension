@@ -5,6 +5,7 @@ var length = document.getElementById("length");
 var elemId = "psw";
 var emailInput = document.getElementById("email");
 var pswInput = document.getElementById("psw");
+var pswBreached = document.getElementById("breached1");
 var password = "";
 document.getElementById("download_database").addEventListener("click", download_database);
 document.getElementById("clear_database").addEventListener("click", clear_database);
@@ -129,6 +130,9 @@ function search_password() {
     popoverPSW.config.content = "Password found in database, password is BREACHED";
     popoverPSW.show();
     console.log('Password found in database, password is BREACHED');
+	pswBreached.classList.remove("notbreached");
+    pswBreached.classList.add("breached");
+	
 
   } else {
     var popoverPSW = $('#searchPSW').data('bs.popover');
@@ -280,6 +284,7 @@ function PasswordComplexity(password) {
   
   if (complexity <2 && myInput.length >8) {
     document.getElementById("progress").value += 100;
+	
   }
   else if (complexity < 3 && myInput.length > 7){
     document.getElementById("progress").value += 75;

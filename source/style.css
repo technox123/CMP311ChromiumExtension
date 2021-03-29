@@ -93,7 +93,17 @@ input[type=submit] {
   content: "❌";
 }
 
-/* chrome extions logo */
-.navbar-brand img{
-  height: 32px;
+.breached {
+ opacity: 100;
+ color: red;
+}
+
+.notbreached {
+	visibility: hidden;
+	opacity: 0.0;
+}
+
+h4 {
+	text-align: center;
+	font-size: 75px;
 }
