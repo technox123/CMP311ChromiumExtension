@@ -92,3 +92,8 @@ input[type=submit] {
   left: -6.75px;
   content: "❌";
 }
+
+/* chrome extions logo */
+.navbar-brand img{
+  height: 32px;
+}
