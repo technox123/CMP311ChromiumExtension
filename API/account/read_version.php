@@ -26,7 +26,7 @@ if($num>0){
   
     // products array
     $accounts_arr=array();
-    $accounts_arr["records"]=array();
+    //$accounts_arr["records"]=array();
   
     // retrieve our table contents
     // fetch() is faster than fetchAll()
@@ -43,7 +43,7 @@ if($num>0){
             "version" => $version
         );
   
-        array_push($accounts_arr["records"], $account_item);
+        array_push($accounts_arr, $account_item);
     }
   
     // set response code - 200 OK
