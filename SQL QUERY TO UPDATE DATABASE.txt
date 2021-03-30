@@ -1,0 +1,1 @@
+UPDATE accounts SET version = *ENTER VERSION NUMBER HERE* WHERE email = "lstein@me.com"
