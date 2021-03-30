@@ -7,7 +7,7 @@ var emailInput = document.getElementById("email");
 var pswInput = document.getElementById("psw");
 var pswBreached = document.getElementById("breached1");
 var password = "";
-document.getElementById("download_database").addEventListener("click", download_database);
+var debug = true;
 document.getElementById("clear_database").addEventListener("click", clear_database);
 document.getElementById("searchPSW").addEventListener("click", search_password);
 document.getElementById("searchEmail").addEventListener("click", search_email);
@@ -30,6 +30,8 @@ $('#generate_P_btn').popover({
 
 $(document).ready(function() {
   $('[data-toggle="popover"]').popover()
+
+  checkForUpdates();
 
   $('#' + elemId).keyup(function(evt) {
 
@@ -98,12 +100,31 @@ var local = (function(){
   return {set:setData,get:getData,clear:clearDatabase}
 })();
 
+function checkForUpdates(){
+
+  $.getJSON('https://mayar.abertay.ac.uk/~cmp311g20eh12/API/account/read_version.php', function(result){
+
+    $.each( result, function( key, val ) {
+      if (local.get("internal_database_version") != val.version) {
+        clear_database();
+        download_database();
+      } else {
+        if (debug == true) {
+          console.log("Current database is already up to date!");
+        }
+      }
+    });
+  });
+
+}
+
 function download_database() {
   $.getJSON('https://mayar.abertay.ac.uk/~cmp311g20eh12/API/account/read_passwords.php', function(result){
 
-
     $.each( result, function( key, val ) {
-      console.log("Currently saving this password: " + JSON.stringify(val.password));
+      if (debug == true) {
+        console.log("Currently saving this password: " + JSON.stringify(val.password));
+      }
       local.set(val.password, val.password);
 
     });
@@ -112,8 +133,20 @@ function download_database() {
   $.getJSON('https://mayar.abertay.ac.uk/~cmp311g20eh12/API/account/read_emails.php', function(result){
 
     $.each( result, function( key, val ) {
-      console.log("Currently saving this email: " + JSON.stringify(val.email));
+      if (debug == true) {
+        console.log("Currently saving this email: " + JSON.stringify(val.email));
+      }
       local.set(val.email, val.email);
+    });
+  });
+
+  $.getJSON('https://mayar.abertay.ac.uk/~cmp311g20eh12/API/account/read_version.php', function(result){
+
+    $.each( result, function( key, val ) {
+      if (debug == true) {
+        console.log("Current version of the database saved: " + JSON.stringify(val.version));
+      }
+      local.set("internal_database_version", val.version);
 
     });
   });
@@ -129,17 +162,19 @@ function search_password() {
     var popoverPSW = $('#searchPSW').data('bs.popover');
     popoverPSW.config.content = "Password found in database, password is BREACHED";
     popoverPSW.show();
-    console.log('Password found in database, password is BREACHED');
-	pswBreached.classList.remove("notbreached");
+    if (debug == true) {
+      console.log('Password found in database, password is BREACHED');
+    }
+    pswBreached.classList.remove("notbreached");
     pswBreached.classList.add("breached");
-	
 
   } else {
     var popoverPSW = $('#searchPSW').data('bs.popover');
     popoverPSW.config.content = "Password is not found in the local database, password seems save to use";
     popoverPSW.show();
-    console.log('Password is not found in the local database, password seems save to use');
-    
+    if (debug == true) {
+      console.log('Password is not found in the local database, password seems save to use');
+    }
   }
 }
 
@@ -280,22 +315,23 @@ function PasswordComplexity(password) {
   
   //using the complexity value to determine progress bar values
   var value = "";
-  document.getElementById("progress").value =0;
+  var pswComplexBar = document.getElementById("progress");
+  pswComplexBar.value =0;
   
   if (complexity <2 && myInput.length >8) {
-    document.getElementById("progress").value += 100;
+    pswComplexBar.value += 100;
 	
   }
   else if (complexity < 3 && myInput.length > 7){
-    document.getElementById("progress").value += 75;
+    pswComplexBar.value += 75;
   }
   else if (complexity < 4 && myInput.length >6) {
-    document.getElementById("progress").value += 50;
+    pswComplexBar.value += 50;
   }
   else if (complexity <5 && myInput.length >5) {
-    document.getElementById("progress").value += 25;
+    pswComplexBar.value += 25;
   }
   else{
-    document.getElementById("progress").value += 5;
+    pswComplexBar.value += 5;
   }
 }
