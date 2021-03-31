@@ -175,6 +175,8 @@ function search_password() {
     if (debug == true) {
       console.log('Password is not found in the local database, password seems save to use');
     }
+	pswBreached.classList.remove("breached");
+    pswBreached.classList.add("notbreached");
   }
 }
 
