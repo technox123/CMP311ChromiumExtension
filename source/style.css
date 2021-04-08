@@ -42,12 +42,48 @@ h4 {
 	font-style: bold;
 }
 
+
+p1 {
+	font-size: 15px;
+}
+
+progress {
+	
+	font-size: .6em;
+	line-height: 1.5em;
+	text-indent: .5em;
+	width: 15em;
+	height: 1.8em;
+	border: 1px solid #0063a6;
+	background: #fff;
+	
+}
+
+
+progress::-webkit-progress-bar {
+	background: #fff;
+}
+
+
+
+progress::-webkit-progress-value{
+	background: green;
+}
+
+
+
+/* Code for compatibility with Firefox browser to ensure colours display correctly */
+progress::-moz-progress-bar {
+	background:#008000;
+}
+
 #sub {
   font-weight: normal;
   font-size: 4mm;
   text-align: center;
   font-weight: bold;
 }
+
 
 
 /* Style the submit button 
