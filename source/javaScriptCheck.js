@@ -170,10 +170,10 @@ function search_password() {
 
   } else {
     var popoverPSW = $('#searchPSW').data('bs.popover');
-    popoverPSW.config.content = "Password is not found in the local database, password seems save to use";
+    popoverPSW.config.content = "Password is not found in the local database, password has not been breached";
     popoverPSW.show();
     if (debug == true) {
-      console.log('Password is not found in the local database, password seems save to use');
+      console.log('Password is not found in the local database, password has not been breached');
     }
 	pswBreached.classList.remove("breached");
     pswBreached.classList.add("notbreached");
@@ -189,9 +189,9 @@ function search_email() {
 
   } else {
     var popoverEmail = $('#searchEmail').data('bs.popover');
-    popoverEmail.config.content = "Email is not found in the local database, password seems save to use";
+    popoverEmail.config.content = "Email is not found in the local database, email has not been breached";
     popoverEmail.show();
-    console.log('Email is not found in the local database, password seems save to use');
+    console.log('Email is not found in the local database, email has not been breached');
     
   }
 }
