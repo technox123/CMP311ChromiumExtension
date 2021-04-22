@@ -15,35 +15,15 @@ class Account{
         $this->conn = $db;
     }
 
-        // read products
-    function read(){
-      
-        // select all query
-        $query = "SELECT
-                    email, password
-                FROM
-                    " . $this->table_name . "";
-      
-        // prepare query statement
-        $stmt = $this->conn->prepare($query);
-      
-        // execute query
-        $stmt->execute();
-      
-        return $stmt;
-    }
-
-    // used when filling up the update product form
+    // query function for reading the version of database
     function readVersion(){
 
-        // select all query
         $query = "SELECT
                     version
                 FROM
                     " . $this->table_name . "
                 LIMIT 1";
 
-      
         // prepare query statement
         $stmt = $this->conn->prepare($query);
       
@@ -53,10 +33,9 @@ class Account{
         return $stmt;
     }
 
-    // used when filling up the update product form
+    // query function for reading all passwords in the database
     function readPassword(){
 
-        // select all query
         $query = "SELECT
                     password
                 FROM
@@ -71,10 +50,9 @@ class Account{
         return $stmt;
     }
 
-    // used when filling up the update product form
+    // query function for reading all emails in the database
     function readEmail(){
 
-        // select all query
         $query = "SELECT
                     email
                 FROM
