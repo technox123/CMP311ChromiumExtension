@@ -3,16 +3,21 @@ var capital = document.getElementById("capital");
 var number = document.getElementById("number");
 var length = document.getElementById("length");
 var elemId = "psw";
-var emailInput = document.getElementById("email");
 var pswInput = document.getElementById("psw");
-var pswBreached = document.getElementById("breached1");
-var password = "";
-var debug = true;
+var emailInput = document.getElementById("email");
+
+var pswBreached = document.getElementById("breached1"); //Element used to tell the user if their password is breached
+
+var password = ""; //Stores typed password from field (used for complexity algorithm)
+var debug = true; //True = enable console output, False = no console output (used for debugging)
+
+//Add button listeners
 document.getElementById("clear_database").addEventListener("click", clear_database);
 document.getElementById("searchPSW").addEventListener("click", search_password);
 document.getElementById("searchEmail").addEventListener("click", search_email);
 document.getElementById("generate_P_btn").addEventListener("click", generateP);
 
+//Initialization for popovers
 $('#searchPSW').popover({
     title: 'Search Result',
     content: 'Loading...'
@@ -31,6 +36,7 @@ $('#generate_P_btn').popover({
 $(document).ready(function() {
   $('[data-toggle="popover"]').popover()
 
+  //Check if there is a database update
   checkForUpdates();
 
   $('#' + elemId).keyup(function(evt) {
@@ -39,6 +45,7 @@ $(document).ready(function() {
       var upperCaseLetters = /[A-Z]/g;
       var numbers = /[0-9]/g;
 
+      //Validate if any lower case characters
       if(pswInput.value.match(lowerCaseLetters)) {
         letter.classList.remove("invalid");
         letter.classList.add("valid");
@@ -47,6 +54,7 @@ $(document).ready(function() {
         letter.classList.add("invalid");
       }
 
+      //Validate if any upper case characters
       if(pswInput.value.match(upperCaseLetters)) {
         capital.classList.remove("invalid");
         capital.classList.add("valid");
@@ -55,6 +63,7 @@ $(document).ready(function() {
         capital.classList.add("invalid");
       }
 
+      //Validate if any numbers
       if(pswInput.value.match(numbers)) {
         number.classList.remove("invalid");
         number.classList.add("valid");
@@ -78,6 +87,8 @@ $(document).ready(function() {
 
 });
 
+// setData = Save the value passed to local storage
+// getData = retrieve the value passed to local storage, if it's there
 var local = (function(){
 
   var setData = function(key,obj){
@@ -93,13 +104,10 @@ var local = (function(){
       }
   }
 
-  var clearDatabase = function() {
-    localStorage.clear();
-  }
-
-  return {set:setData,get:getData,clear:clearDatabase}
+  return {set:setData,get:getData}
 })();
 
+//Send a request to URL -> Parse returned JSON -> if the versions are not matching then clear the local storage and re-download updated version
 function checkForUpdates(){
 
   $.getJSON('https://mayar.abertay.ac.uk/~cmp311g20eh12/API/account/read_version.php', function(result){
@@ -118,6 +126,7 @@ function checkForUpdates(){
 
 }
 
+//Send a request to URL -> Parse returned JSON -> Save locally using chrome.storage api
 function download_database() {
   $.getJSON('https://mayar.abertay.ac.uk/~cmp311g20eh12/API/account/read_passwords.php', function(result){
 
@@ -152,11 +161,14 @@ function download_database() {
   });
 }
 
+//Clear the local storage
 function clear_database() {
   local.clear();
   console.log("Cleared local storage!");
 }
 
+//Used to search for password.
+//Get password currently in the field -> show a pop up if the password is found, if not then show a pop up saying that their password is not found
 function search_password() {
   if(local.get(password)) {
     var popoverPSW = $('#searchPSW').data('bs.popover');
@@ -180,6 +192,7 @@ function search_password() {
   }
 }
 
+//Same as the function above. However, this time for the email field
 function search_email() {
   if(local.get(emailInput.value)) {
     var popoverEmail = $('#searchEmail').data('bs.popover');
