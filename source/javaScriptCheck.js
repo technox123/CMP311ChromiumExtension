@@ -104,7 +104,11 @@ var local = (function(){
       }
   }
 
-  return {set:setData,get:getData}
+  var clearDatabase = function() {
+    localStorage.clear();
+  }
+  
+  return {set:setData,get:getData,clear:clearDatabase}
 })();
 
 //Send a request to URL -> Parse returned JSON -> if the versions are not matching then clear the local storage and re-download updated version
